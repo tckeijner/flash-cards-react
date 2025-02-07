@@ -1,11 +1,12 @@
-import './App.css'
+import './App.scss'
+import Welcome from "./Welcome/Welcome.tsx";
 
 function App() {
-  return (
-    <>
-        Flash Cards
-    </>
-  )
+    return (
+        <>
+            <Welcome></Welcome>
+        </>
+    )
 }
 
 export default App
