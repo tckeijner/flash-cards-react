@@ -1,4 +1,5 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function Welcome() {
     return (
@@ -7,16 +8,20 @@ function Welcome() {
             <div>Please log in or create an account</div>
             <Row className={'justify-content-center m-2'}>
                 <Col className="col-6 col-sm-4 col-md-3">
-                    <Button variant={"primary"} type="button" className="btn btn-primary w-100">
-                        Login
-                    </Button>
+                    <Link to={"/login"}>
+                        <Button variant={"primary"} type="button" className="btn btn-primary w-100">
+                            Login
+                        </Button>
+                    </Link>
                 </Col>
             </Row>
             <Row className={'justify-content-center m-2'}>
                 <div className="col-6 col-sm-4 col-md-3">
-                    <Button variant={"primary"} type="button" className="btn btn-primary w-100">
-                        Create account
-                    </Button>
+                    <Link to={"/create-account"}>
+                        <Button variant={"primary"} type="button" className="btn btn-primary w-100">
+                            Create account
+                        </Button>
+                    </Link>
                 </div>
             </Row>
         </Container>
