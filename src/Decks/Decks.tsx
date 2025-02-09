@@ -9,10 +9,6 @@ function Decks() {
     <Tooltip id={text} placement="top" {...props}>{text}</Tooltip>
   );
 
-  const onClickDelete = (id: string) => {
-    handleDelete(id);
-  };
-
   return (
     <Container>
       <Row className={"row-cols-1 mt-4"}>
@@ -46,7 +42,7 @@ function Decks() {
                       </Button>
                     </OverlayTrigger>
                     <OverlayTrigger overlay={(props) => renderToolTip(props, "Delete")}>
-                      <Button variant={"outline-primary"} className={"m-2"} onClick={() => onClickDelete(_id)}>
+                      <Button variant={"outline-primary"} className={"m-2"} onClick={() => handleDelete(_id)}>
                         <Trash></Trash>
                       </Button>
                     </OverlayTrigger>
