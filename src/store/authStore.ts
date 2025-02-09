@@ -9,7 +9,9 @@ export interface AccountDataModel {
 
 export interface AuthStoreModel {
   authData: AccountDataModel;
+  authError: string | null;
   setAuthData: (authData: AccountDataModel) => void;
+  setAuthError: (error: any) => void;
 }
 
 export const useAuthStore = create<AuthStoreModel>((set) => ({
@@ -19,6 +21,7 @@ export const useAuthStore = create<AuthStoreModel>((set) => ({
     token: null,
     refreshToken: null
   },
+  authError: null,
   setAuthData: (authData: AccountDataModel) => {
     if (authData.token) {
       localStorage.setItem("authToken", authData.token);
@@ -27,5 +30,6 @@ export const useAuthStore = create<AuthStoreModel>((set) => ({
       localStorage.setItem("refreshToken", authData.refreshToken);
     }
     set({authData});
-  }
+  },
+  setAuthError: (error: any) => set({authError: error?.toString()}),
 }));

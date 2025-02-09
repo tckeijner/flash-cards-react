@@ -1,15 +1,14 @@
 import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import {FormEvent, useState} from "react";
-import {AccountDataModel, useAuthStore} from "../../store/authStore.ts";
 import {useNavigate} from "react-router-dom";
-import {httpClient} from "../../http/httpClient.ts";
+import {useAuth} from "../../hooks/useAuth.ts";
 
 function Login() {
-  const {setAuthData} = useAuthStore();
+  const {handleLogin} = useAuth();
   const [validated, setValidated] = useState(false);
   const navigate = useNavigate();
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
     if (!form.checkValidity()) {
@@ -17,17 +16,9 @@ function Login() {
     }
 
     setValidated(true);
-
-    const username = form.username.value;
-    const password = form.password.value;
-
-    httpClient.post<AccountDataModel>("/users/login", {username, password})
-      .then(response => {
-        setAuthData(response.data);
-        navigate("/decks");
-      })
-      .catch(error => console.log(error));
-  }
+    await handleLogin(form.username.value, form.password.value.value);
+    navigate("/decks");
+  };
 
   return (
     <Container className={"text-center"}>
