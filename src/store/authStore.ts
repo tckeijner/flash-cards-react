@@ -19,5 +19,13 @@ export const useAuthStore = create<AuthStoreModel>((set) => ({
     token: null,
     refreshToken: null
   },
-  setAuthData: (authData: AccountDataModel) => set({authData})
-}))
+  setAuthData: (authData: AccountDataModel) => {
+    if (authData.token) {
+      localStorage.setItem("authToken", authData.token);
+    }
+    if (authData.refreshToken) {
+      localStorage.setItem("refreshToken", authData.refreshToken);
+    }
+    set({authData});
+  }
+}));
