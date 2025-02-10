@@ -12,19 +12,24 @@ function Login() {
     event.preventDefault();
     const form = event.currentTarget;
     if (!form.checkValidity()) {
+      event.stopPropagation();
+      setValidated(true);
       return;
     }
 
-    setValidated(true);
-    await handleLogin(form.username.value, form.password.value.value);
-    navigate("/decks");
+    try {
+      await handleLogin(form.username.value, form.password.value);
+      navigate("/decks");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <Container className={"text-center"}>
       <Row className={"justify-content-center m-2"}>
         <Col md={6}>
-          <Form onSubmit={handleSubmit} validated={validated}>
+          <Form onSubmit={handleSubmit} noValidate validated={validated}>
             <div className={"m-2"}>
               <Form.Group>
                 <Form.Control type={"text"} id={"username"} placeholder={"Username"} required></Form.Control>

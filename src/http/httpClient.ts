@@ -1,4 +1,5 @@
 import axios from "axios";
+import {Tokens} from "../models/authModels.ts";
 
 export const httpClient = axios.create({
   baseURL: "http://localhost:5200"
@@ -6,7 +7,7 @@ export const httpClient = axios.create({
 
 httpClient.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem(Tokens.Authentication);
 
     if (token) {
       config.headers.Token = token;

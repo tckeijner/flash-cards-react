@@ -1,15 +1,6 @@
 import {create} from "zustand/react";
+import {Deck} from "../models/decksModels.ts";
 
-export interface Card {
-  front: string;
-  back: string;
-}
-
-export interface Deck {
-  _id: string;
-  name: string;
-  cards: Card[];
-}
 
 export interface DecksStoreModel {
   decks: Deck[];
