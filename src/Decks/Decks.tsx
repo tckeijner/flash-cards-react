@@ -34,7 +34,7 @@ function Decks() {
                 <Card>
                   <Card.Body>
                     <Card.Title>{name}</Card.Title>
-                    <Card.Subtitle className={"mb-2 text-body-secondary"}>{cards?.length} cards</Card.Subtitle>
+                    <Card.Subtitle className={"mb-2 text-body-secondary"}>{cards?.length ?? 0} cards</Card.Subtitle>
                     <div className={"d-flex justify-content-end"}>
                       <OverlayTrigger overlay={(props) => renderToolTip(props, "Review")}>
                         <Button variant={"outline-primary"} className={"m-2"}>
