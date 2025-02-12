@@ -1,6 +1,7 @@
 import {useDecksStore} from "../store/decksStore.ts";
-import {deleteDeck, fetchDecks} from "../http/decksService.ts";
+import {createDeck, deleteDeck, fetchDecks} from "../http/decksService.ts";
 import {useEffect} from "react";
+import {Deck} from "../models/decksModels.ts";
 
 /**
  * Custom hook to manage deck-related state and logic.
@@ -15,6 +16,7 @@ export const useDecks = () => {
    * Updates the store with fetched decks or sets an error if the fetch fails.
    */
   useEffect(() => {
+    setDecksError(null);
     fetchDecks()
       .then(setDecks) // Update the store with the fetched decks
       .catch(setDecksError); // Update the store with the error message if fetching fails
@@ -26,10 +28,18 @@ export const useDecks = () => {
    *
    * @param id - The ID of the deck to delete
    */
-  const handleDelete = (id: string) => {
+  const handleDeleteDeck = (id: string) => {
+    setDecksError(null);
     deleteDeck(id)
       .then(setDecks) // Update the store with the updated list of decks after deletion
       .catch(setDecksError); // Update the store with the error message if deletion fails
+  };
+
+  const handleCreateDeck = (deck: Partial<Deck>) => {
+    setDecksError(null);
+    createDeck(deck)
+      .then(setDecks)
+      .catch(setDecksError);
   };
 
   /**
@@ -38,6 +48,7 @@ export const useDecks = () => {
   return {
     decks, // The current list of decks
     decksError, // Any error encountered during fetching or deleting
-    handleDelete, // Function to delete a deck by ID
+    handleDeleteDeck, // Function to delete a deck by ID
+    handleCreateDeck,
   };
 };

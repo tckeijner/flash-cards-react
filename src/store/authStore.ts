@@ -1,11 +1,12 @@
 import {create} from "zustand/react";
 import {AccountDataModel, Tokens} from "../models/authModels.ts";
+import {AxiosError} from "axios";
 
 export interface AuthStoreModel {
   authData: AccountDataModel;
   authError: string | null;
   setAuthData: (authData: AccountDataModel) => void;
-  setAuthError: (error: any) => void;
+  setAuthError: (error: AxiosError | null) => void;
   clearAuthData: () => void;
 }
 
@@ -36,10 +37,14 @@ export const useAuthStore = create<AuthStoreModel>((set) => ({
     }
     set({authData});
   },
-  setAuthError: (error: any) => {
+  setAuthError: (error: AxiosError | null) => {
     localStorage.removeItem(Tokens.Authentication);
     localStorage.removeItem(Tokens.Refresh);
     set({authError: error?.toString()});
   },
-  clearAuthData: () => set(defaults),
+  clearAuthData: () => {
+    localStorage.removeItem(Tokens.Authentication);
+    localStorage.removeItem(Tokens.Refresh);
+    set(defaults);
+  },
 }));

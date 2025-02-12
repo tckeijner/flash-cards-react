@@ -1,5 +1,6 @@
 import {create} from "zustand/react";
 import {Deck} from "../models/decksModels.ts";
+import {AxiosError} from "axios";
 
 
 export interface DecksStoreModel {
@@ -13,5 +14,5 @@ export const useDecksStore = create<DecksStoreModel>((set) => ({
   decks: [],
   decksError: null,
   setDecks: (decks: Deck[]) => set({decks}),
-  setDecksError: (decksError: any) => set({decksError: decksError.toString()}),
+  setDecksError: (decksError: AxiosError | null) => set({decksError: decksError?.toString()}),
 }));

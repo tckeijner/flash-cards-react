@@ -17,12 +17,8 @@ function Login() {
       return;
     }
 
-    try {
-      await handleLogin(form.username.value, form.password.value);
-      navigate("/decks");
-    } catch (error) {
-      console.log(error);
-    }
+    await handleLogin(form.username.value, form.password.value);
+    navigate("/decks");
   };
 
   return (
