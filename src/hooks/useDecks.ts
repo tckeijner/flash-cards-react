@@ -1,5 +1,5 @@
 import {useDecksStore} from "../store/decksStore.ts";
-import {createDeck, deleteDeck, fetchDecks} from "../http/decksService.ts";
+import {createDeck, deleteDeck, fetchDecks, updateDeck} from "../http/decksService.ts";
 import {useEffect} from "react";
 import {Deck} from "../models/decksModels.ts";
 
@@ -42,6 +42,13 @@ export const useDecks = () => {
       .catch(setDecksError);
   };
 
+  const handleUpdateDeck = (deck: Deck) => {
+    setDecksError(null);
+    updateDeck(deck)
+      .then(setDecks)
+      .catch(setDecksError);
+  };
+
   /**
    * Returns the current state of decks, any error messages, and a handler for deleting decks.
    */
@@ -50,5 +57,6 @@ export const useDecks = () => {
     decksError, // Any error encountered during fetching or deleting
     handleDeleteDeck, // Function to delete a deck by ID
     handleCreateDeck,
+    handleUpdateDeck
   };
 };

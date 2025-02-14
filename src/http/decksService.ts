@@ -15,3 +15,8 @@ export const createDeck = async (deck: Partial<Deck>): Promise<Deck[]> => {
   const {data} = await httpClient.post<Deck[]>("/decks/", {deck});
   return data;
 };
+
+export const updateDeck = async (deck: Deck): Promise<Deck[]> => {
+  const {data} = await httpClient.put<Deck[]>("/decks/", {deck});
+  return data;
+};

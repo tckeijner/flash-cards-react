@@ -1,4 +1,4 @@
-export interface Card {
+export interface DeckCard {
   front: string;
   back: string;
 }
@@ -6,5 +6,5 @@ export interface Card {
 export interface Deck {
   _id: string;
   name: string;
-  cards: Card[];
+  cards: DeckCard[];
 }

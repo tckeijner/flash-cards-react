@@ -3,6 +3,7 @@ import {Book, Pencil, Trash} from "react-bootstrap-icons";
 import {useDecks} from "../hooks/useDecks.ts";
 import {useState} from "react";
 import CreateDeckModal from "./CreateDeck.tsx";
+import {Link} from "react-router-dom";
 
 function Decks() {
   const {decks, decksError, handleDeleteDeck} = useDecks();
@@ -42,9 +43,9 @@ function Decks() {
                         </Button>
                       </OverlayTrigger>
                       <OverlayTrigger overlay={(props) => renderToolTip(props, "Edit")}>
-                        <Button variant={"outline-primary"} className={"m-2"}>
+                        <Link to={"/decks/" + _id}><Button variant={"outline-primary"} className={"m-2"}>
                           <Pencil></Pencil>
-                        </Button>
+                        </Button></Link>
                       </OverlayTrigger>
                       <OverlayTrigger overlay={(props) => renderToolTip(props, "Delete")}>
                         <Button variant={"outline-primary"} className={"m-2"} onClick={() => handleDeleteDeck(_id)}>
